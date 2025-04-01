@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      #httpclient:
+      #  ssl:
+      #    disable: true
+      routes:
+        - id: example_route
+          uri: https://oppirifchess-backend.onrender.com
+          predicates:
+            - Path=/api/member
+
+          #filters:
+          #  - StripPrefix=1
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
