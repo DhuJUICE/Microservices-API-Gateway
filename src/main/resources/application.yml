@@ -11,7 +11,7 @@ spring:
             - Path=/api/member
 
           #filters:
-          #  - StripPrefix=1
+          #  - StripPrefix=1  #strip prefix means to strip away a piece of the predictate path, e.g this path=/api/member, stripPrefix=1 will remove /api and leave path=/member
 
 server:
   port: 8080
