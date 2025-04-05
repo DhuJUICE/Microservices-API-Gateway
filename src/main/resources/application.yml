@@ -4,9 +4,6 @@ spring:
 
   cloud:
     gateway:
-      #httpclient:
-      #  ssl:
-      #    disable: true
       routes:
         - id: example_route
           uri: https://oppirifchess-backend.onrender.com
