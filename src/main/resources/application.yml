@@ -6,12 +6,12 @@ spring:
     gateway:
       routes:
         - id: example_route
-          uri: https://oppirifchess-backend.onrender.com
+          uri: https://youtube.com
           predicates:
-            - Path=/api/member
+            - Path=/api/jugamsoft/
 
-          #filters:
-          #  - StripPrefix=1  #strip prefix means to strip away a piece of the predictate path, e.g this path=/api/member, stripPrefix=1 will remove /api and leave path=/member
+          filters:
+            - StripPrefix=2  #strip prefix means to strip away a piece of the predictate path, e.g this path=/api/member, stripPrefix=1 will remove /api and leave path=/member
 
 server:
   port: 8080
