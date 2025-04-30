@@ -12,6 +12,8 @@ router.post('/login', async (req, res) => {
         const response = await axios.get(`http://127.0.0.1:8080/api/users/username/${username}`);
 
         const user = response.data; // The user returned by Spring Boot
+        const userRole = user.role;
+        const userName = user.username;
 
         // Check if the user exists and the password matches
         if (!user || user.password !== password) {
@@ -20,7 +22,7 @@ router.post('/login', async (req, res) => {
 
         // Create JWT token if credentials are valid
         const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token });
+        res.json({ token, "role": userRole, "username": userName});
     } catch (error) {
         // Handle errors (e.g., user not found, microservice unreachable)
         if (error.response && error.response.status === 404) {
