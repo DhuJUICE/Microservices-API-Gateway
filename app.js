@@ -1,19 +1,26 @@
 const express = require('express');
 const cors = require('cors');
+
+//include the route files to be used
 const authRoutes = require('./routes/auth');
+const atmRoutes = require('./routes/atm');
+
 require('dotenv').config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes
+//Define the actual url Routes to my routes files
 app.use('/auth', authRoutes);
+app.use('/atm', atmRoutes);
 
+/*
 // Protected route example
 app.get('/protected', authenticateJWT, (req, res) => {
     res.json({ message: 'You have access', user: req.user });
 });
+
 
 // JWT middleware
 const jwt = require('jsonwebtoken');
@@ -31,4 +38,5 @@ function authenticateJWT(req, res, next) {
     }
 }
 
+*/
 app.listen(3000, () => console.log('API Gateway running on port 3000'));
