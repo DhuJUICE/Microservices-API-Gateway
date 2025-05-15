@@ -30,7 +30,7 @@ function metricsMiddleware(req, res, next) {
 
 // Function to write metrics to a log file every minute
 function startMetricsLogging() {
-  const logDir = path.join(__dirname, 'logs');
+  const logDir = path.join(__dirname, '../logs');
   if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir);
   }

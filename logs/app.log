@@ -1,6 +1,0 @@
-[2025-05-15 04:44:11] info: POST /auth/login
-[2025-05-15 04:44:35] info: POST /auth/login
-[2025-05-15 04:44:46] info: GET /atm/transaction/4
-[2025-05-15 04:44:48] info: GET /atm/transaction/4
-[2025-05-15 04:44:53] info: POST /atm/transaction/4
-[2025-05-15 04:44:56] info: POST /atm/transaction/4
