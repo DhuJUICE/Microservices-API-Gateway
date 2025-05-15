@@ -55,4 +55,54 @@ router.post('/delete', authenticateJWT, async (req, res) => {
 	}
 });
 
+
+// POST - Create a new bank account
+router.post('/create', authenticateJWT, async (req, res) => {
+    const { username, password, bankBalance, bankName, bankAccountNumber} = req.body;
+    const user = null;
+    const bankAccountDetails = null;
+
+    // Validate request body
+    if (!username || !password) {
+        return res.status(400).json({ error: 'Username and password are required' });
+    }
+
+    //Validate bank details
+    if(!bankBalance || !bankName || !bankAccountNumber){
+        return res.status(400).json({ error: 'Bank balance, bank name, and bankAccountNumber are required' });
+    }
+
+    //create user in USER Table
+    try {
+        const response = await axios.post('http://127.0.0.1:8080/api/users', {
+            username,
+            password
+        });
+
+        user = response.data;
+
+        res.status(201).json({ message: 'User created successfully', data: user });
+    } catch (error) {
+        console.error('Error creating user:', error.message);
+        res.status(500).json({ error: 'Failed to create user' });
+    }
+
+    //create bank account financial data in FINANCIAL Table
+    try {
+        const response = await axios.post('http://127.0.0.1:8080/api/financials', {
+            bankBalance,
+            bankAccountNumber,
+            bankName,
+            user
+        });
+
+        bankAccountDetails = response.data;
+
+        res.status(201).json({ message: 'Bank Account Details created successfully', data: bankAccountDetails });
+    } catch (error) {
+        console.error('Error creating Bank Account Details:', error.message);
+        res.status(500).json({ error: 'Failed to create Bank Account Details' });
+    }
+});
+
 module.exports = router;
