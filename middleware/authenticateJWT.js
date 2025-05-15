@@ -1,6 +1,6 @@
 // middleware/authenticateJWT.js
 //reusable JWT authentication module
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken'); //need to npm install jsonwebtoken
 
 function authenticateJWT(req, res, next) {
     const authHeader = req.headers.authorization;
