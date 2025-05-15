@@ -50,7 +50,7 @@ function startMetricsLogging() {
     } catch (err) {
       console.error('Error collecting metrics:', err);
     }
-  }, 60 * 1000); // every 60 seconds
+  }, 30 * 1000); // every 60 seconds
 }
 
 // Expose the register and middleware for use in app.js
