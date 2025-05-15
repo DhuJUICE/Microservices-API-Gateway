@@ -1,11 +1,11 @@
-const express = require('express');
-const cors = require('cors');
+const express = require('express'); //need to npm install express
+const cors = require('cors'); //need to npm install cors
 
 //include the route files to be used
 const authRoutes = require('./routes/auth');
 const atmRoutes = require('./routes/atm');
 
-require('dotenv').config();
+require('dotenv').config(); //need to npm install dotenv
 
 const app = express();
 app.use(cors());

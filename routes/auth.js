@@ -1,6 +1,6 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const axios = require('axios'); // Import Axios
+const jwt = require('jsonwebtoken'); //need to npm install jsonwebtokens
+const axios = require('axios'); // Import Axios //need to npm install axios
 
 const router = express.Router();
 
@@ -25,6 +25,7 @@ router.post('/login', async (req, res) => {
         // Create JWT token if credentials are valid
         const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.json({ token, "role": userRole, "username": userName, "userId" : userId});
+		
     } catch (error) {
         // Handle errors (e.g., user not found, microservice unreachable)
         if (error.response && error.response.status === 404) {
