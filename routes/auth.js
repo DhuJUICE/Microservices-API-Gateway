@@ -27,6 +27,7 @@ router.post('/login', async (req, res) => {
         res.json({ token, "role": userRole, "username": userName, "userId" : userId});
 		
     } catch (error) {
+		console.error(error.message);
         // Handle errors (e.g., user not found, microservice unreachable)
         if (error.response && error.response.status === 404) {
             return res.status(404).json({ error: 'User not found' });
