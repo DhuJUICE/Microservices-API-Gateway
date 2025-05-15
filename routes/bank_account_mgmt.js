@@ -108,4 +108,39 @@ router.post('/create', authenticateJWT, async (req, res) => {
     }
 });
 
+// POST - Update user's password and bank details bank's name
+router.post('/update', authenticateJWT, async (req, res) => {
+    const { userId, bankAccountId, password, bankName, oldUsername, oldBankBalance, oldBankAccountNumber, oldUser} = req.body;
+
+    // Validation
+    if (!userId && !bankAccountId) {
+        return res.status(400).json({ error: 'userId or bankAccountId are required' });
+    }
+
+    //check if either password or bankname or both has to be updated
+    if (!password && !bankName) {
+        return res.status(400).json({ error: 'At least one of Password or BankName are required' });
+    }
+
+    try {
+        if(password){
+            // Update user password
+            await axios.put(`http://127.0.0.1:8080/api/users/${userId}`, { "password":password, "username":oldUsername });
+            console.log(`User ${userId} password updated`);
+        }
+
+        if(bankName){
+            // Update bank account name
+            await axios.put(`http://127.0.0.1:8080/api/financials/${bankAccountId}`, { "bankName":bankName, "bankBalance":oldBankBalance, "bankAccountNumber":oldBankAccountNumber, "user":oldUser});
+            console.log(`Bank account ${bankAccountId} bankName updated`);
+        }
+
+        res.status(200).json({ message: 'Bank Account updated successfully' });
+
+    } catch (error) {
+        console.error('Error updating data:', error.message);
+        res.status(500).json({ error: 'Failed to update user or bank account' });
+    }
+});
+
 module.exports = router;
