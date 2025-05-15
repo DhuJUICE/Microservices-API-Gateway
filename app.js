@@ -4,6 +4,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const atmRoutes = require('./routes/atm');
 const logger = require('./middleware/logger');
+const bankAccountRoute = require('./routes/bank_account_mgmt');
 
 require('dotenv').config();
 
@@ -25,6 +26,7 @@ app.use(metricsMiddleware);
 // Define routes
 app.use('/auth', authRoutes);
 app.use('/atm', atmRoutes);
+app.use('/bank-account', bankAccountRoute);
 
 // Metrics endpoint
 app.get('/metrics', async (req, res) => {
