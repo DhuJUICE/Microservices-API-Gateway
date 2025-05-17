@@ -1,18 +1,34 @@
-const express = require('express');
-const cors = require('cors');
+const express = require('express'); //need to npm install express
+const cors = require('cors'); //need to npm install cors
+const rateLimit = require('express-rate-limit'); //need to npm install express-rate-limit
 
 const authRoutes = require('./routes/auth');
 const atmRoutes = require('./routes/atm');
 const logger = require('./middleware/logger');
 const bankAccountRoute = require('./routes/bank_account_mgmt');
 
-require('dotenv').config();
+require('dotenv').config(); //need to npm install dotenv
 
 const { register, metricsMiddleware, startMetricsLogging } = require('./middleware/monitoring');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+//Rate Limiter - 100 requests/15minutes/IP
+const rateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100,
+  message: {
+    status: 429,
+    message: 'Too many requests from this IP, please try again later.'
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+//Apply global rate limiter to all requests
+app.use(rateLimiter);
 
 // Logging all requests
 app.use((req, res, next) => {
